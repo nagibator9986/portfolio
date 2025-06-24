@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank System | Nagibator9986</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Nagibator9986</div>
+            <ul class="nav-links">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="project-details">
+        <div class="project-header">
+            <h1>Bank System</h1>
+            <p class="subtitle">A secure and modern web-based banking platform</p>
+        </div>
+        <div class="project-content">
+            <div class="section">
+                <h2>Project Overview</h2>
+                <p>The Bank System is a full-stack web application designed to simulate a modern online banking platform. It provides users with secure account management, fund transfers, transaction history, and administrative controls. Built with a focus on security and usability, the project integrates advanced features like two-factor authentication (2FA) and encrypted data storage.</p>
+                <p>Developed as a proof-of-concept, the platform supports user registration, login, and real-time transaction processing using Stripe Sandbox for payments and Twilio for 2FA. An admin panel allows managing users and transactions, making it suitable for both customers and bank employees.</p>
+                <div class="quote">
+                    <p>"Delivering a secure, user-friendly banking experience with modern web technologies."</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Technical Details</h2>
+                <p>The application is built using <strong>Flask</strong> as the backend framework, with <strong>SQLite</strong> for data storage. The database schema includes tables for users, accounts, transactions, and admin logs, ensuring efficient data management. User passwords and sensitive data are encrypted using <strong>AES-256</strong> with a secure key stored in environment variables.</p>
+                <p><strong>Stripe Sandbox</strong> handles payment processing, enabling secure fund transfers and deposits. API requests are authenticated with Stripe’s secret keys, and transactions are logged in real-time. <strong>Twilio</strong> provides SMS-based 2FA, sending verification codes to users during login or high-value transactions.</p>
+                <p>The frontend uses <strong>Jinja2</strong> templates styled with <strong>Tailwind CSS</strong> for a responsive, modern interface. JavaScript enhances interactivity, such as dynamic form validation and transaction updates. The application implements CSRF protection and input sanitization to prevent common vulnerabilities.</p>
+                <div class="code-block">
+                    <pre>
+# Example: AES encryption for passwords
+from Crypto.Cipher import AES
+import base64
+
+def encrypt_data(data, key):
+    cipher = AES.new(key, AES.MODE_EAX)
+    nonce = cipher.nonce
+    ciphertext, tag = cipher.encrypt_and_digest(data.encode('utf-8'))
+    return base64.b64encode(nonce + ciphertext + tag)
+                    </pre>
+                    <p class="code-caption">AES-256 encryption ensures secure storage of sensitive user data.</p>
+                </div>
+                <div class="metrics">
+                    <h3>Key Metrics</h3>
+                    <ul>
+                        <li><span>Response Time:</span> ~200ms for API requests</li>
+                        <li><span>Database Size:</span> Supports up to 10,000 users</li>
+                        <li><span>Transaction Speed:</span> ~1–2 seconds per transfer</li>
+                        <li><span>Security Level:</span> AES-256, 2FA, CSRF protection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>User Management</h3>
+                        <p>Secure registration and login with AES-encrypted passwords and 2FA via SMS.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Fund Transfers</h3>
+                        <p>Real-time transfers between accounts using Stripe Sandbox for secure payments.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Admin Panel</h3>
+                        <p>Manage users, transactions, and accounts with a dedicated admin interface (login: admin/admin).</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Transaction History</h3>
+                        <p>View detailed transaction logs with timestamps and amounts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Challenges & Solutions</h2>
+                <ul class="challenges-list">
+                    <li>
+                        <strong>Challenge:</strong> SQLite OperationalError due to missing columns in database schema.<br>
+                        <strong>Solution:</strong> Updated schema to include required fields and implemented database migrations.
+                    </li>
+                    <li>
+                        <strong>Challenge:</strong> Stripe API rate limits during high transaction volumes.<br>
+                        <strong>Solution:</strong> Added retry logic and cached API responses for efficiency.
+                    </li>
+                    <li>
+                        <strong>Challenge:</strong> Ensuring 2FA reliability across different regions.<br>
+                        <strong>Solution:</strong> Configured Twilio with fallback SMS providers and error handling.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Security Measures</h2>
+                <p>Security is a core focus of the Bank System:</p>
+                <ul>
+                    <li><strong>AES-256 Encryption:</strong> Encrypts passwords and transaction data to protect against unauthorized access.</li>
+                    <li><strong>Two-Factor Authentication:</strong> SMS-based 2FA via Twilio for login and sensitive operations.</li>
+                    <li><strong>CSRF Protection:</strong> Flask-WTF tokens prevent cross-site request forgery attacks.</li>
+                    <li><strong>Input Sanitization:</strong> Escapes user inputs to mitigate SQL injection and XSS risks.</li>
+                    <li><strong>Secure API Keys:</strong> Stripe and Twilio keys are stored in environment variables.</li>
+                </ul>
+                <p>The platform adheres to best practices for web security, ensuring a safe environment for users and administrators.</p>
+            </div>
+
+            <div class="section">
+                <h2>Visualizations</h2>
+                <p>The application includes visualizations to enhance user experience:</p>
+                <ul>
+                    <li><strong>Transaction History Chart:</strong> Displays transaction amounts over time using Chart.js.</li>
+                    <li><strong>Account Balance Trend:</strong> Tracks balance changes with a line graph.</li>
+                    <li><strong>Transfer Summary:</strong> Pie chart showing distribution of transfers by recipient.</li>
+                </ul>
+                <div class="screenshots">
+                    <div class="screenshot">
+                        <div class="placeholder-img">Placeholder for Transaction History Chart</div>
+                        <p>Transaction History Chart</p>
+                    </div>
+                    <div class="screenshot">
+                        <div class="placeholder-img">Placeholder for Account Balance Trend</div>
+                        <p>Account Balance Trend</p>
+                    </div>
+                    <div class="screenshot">
+                        <div class="placeholder-img">Placeholder for Transfer Summary</div>
+                        <p>Transfer Summary</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Technologies Used</h2>
+                <ul class="tech-list">
+                    <li>Python</li>
+                    <li>Flask</li>
+                    <li>SQLite</li>
+                    <li>Stripe Sandbox</li>
+                    <li>Twilio</li>
+                    <li>Tailwind CSS</li>
+                    <li>JavaScript</li>
+                    <li>Jinja2</li>
+                    <li>Chart.js</li>
+                    <li>Crypto (PyCryptodome)</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Explore the Code</h2>
+                <p>Visit the GitHub repository to explore the implementation details and try the banking system yourself.</p>
+                <a href="https://github.com/nagibator9986/bank-system" class="project-link" target="_blank">View Repository</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Contact Me</h3>
+        <p>Email: [Your Email]</p>
+        <p>GitHub: <a href="https://github.com/nagibator9986">nagibator9986</a></p>
+        <p>© 2025 Nagibator9986. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

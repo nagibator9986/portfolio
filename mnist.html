@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST LIFF Izhekebich CNN | Nagibator9986</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Nagibator9986</div>
+            <ul class="nav-links">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="project-details">
+        <div class="project-header">
+            <h1>MNIST LIFF Izhekebich CNN</h1>
+            <p class="subtitle">A fusion of spiking neural networks and CNNs for efficient digit classification</p>
+        </div>
+        <div class="project-content">
+            <div class="section">
+                <h2>Project Overview</h2>
+                <p>This project dives into the world of spiking neural networks (SNNs) using the Izhikevich neuron model to classify handwritten digits from the MNIST dataset. Paired with a convolutional neural network (CNN), it compares the energy efficiency and accuracy of SNNs against traditional CNNs.</p>
+                <p>With optimizations like Spike-Timing-Dependent Plasticity (STDP) and sparse weight matrices, the project achieves up to <strong>94% accuracy</strong>, showcasing the potential of biologically inspired models for image classification on resource-constrained devices.</p>
+                <div class="quote">
+                    <p>"Exploring the balance between biological plausibility and computational efficiency in neural networks."</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Technical Details</h2>
+                <p>The SNN was built using <strong>Brian2</strong>, simulating <strong>1,254,400 synapses</strong> with a maximum spike frequency of <strong>20 Hz</strong>. The Izhikevich model, known for its computational efficiency, is defined by:</p>
+                <div class="code-block">
+                    <pre>
+v' = 0.04v² + 5v + 140 - u + I
+u' = a(bv - u)
+                    </pre>
+                    <p class="code-caption">Where <code>v</code> is the membrane potential, <code>u</code> is the recovery variable, and <code>I</code> is the input current.</p>
+                </div>
+                <p>Parameters <code>a</code> and <code>b</code> were tuned for regular spiking behavior, and STDP was used for learning. Sparse weight matrices (mean ~0.2501, max ~0.5000) were generated with <strong>NumPy</strong> and stored in <code>.npy</code> format to reduce memory usage.</p>
+                <p>The CNN, implemented in <strong>PyTorch</strong>, included Conv2D layers, MaxPooling2D, and fully connected layers with an input shape of (28, 28, 1). Batch normalization and an Input layer resolved shape warnings, achieving <strong>94% accuracy</strong> after 10 epochs.</p>
+                <div class="metrics">
+                    <h3>Key Metrics</h3>
+                    <ul>
+                        <li><span>Data Loading:</span> ~3.21 seconds</li>
+                        <li><span>Network Initialization:</span> ~0.42 seconds</li>
+                        <li><span>Accuracy:</span> ~72% (SNN, initial), ~94% (CNN, optimized)</li>
+                        <li><span>Energy per Epoch:</span> Measured for SNN efficiency</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <h3>High Accuracy</h3>
+                        <p>Reached ~94% accuracy with CNN and ~72% with SNN, enhanced by hidden layers and STDP.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Energy Efficiency</h3>
+                        <p>SNNs consumed less power, ideal for edge devices.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Sparse Weights</h3>
+                        <p>Reduced memory with sparse matrices in .npy format.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Visualizations</h3>
+                        <p>Generated confusion matrices and energy plots with Matplotlib.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Challenges & Solutions</h2>
+                <ul class="challenges-list">
+                    <li>
+                        <strong>Challenge:</strong> Errors in SpikeGeneratorGroup due to invalid spike timings.<br>
+                        <strong>Solution:</strong> Adjusted temporal resolution and validated spike intervals.
+                    </li>
+                    <li>
+                        <strong>Challenge:</strong> Memory errors during SNN training.<br>
+                        <strong>Solution:</strong> Used sparse matrices and optimized batch sizes.
+                    </li>
+                    <li>
+                        <strong>Challenge:</strong> Lower initial SNN accuracy.<br>
+                        <strong>Solution:</strong> Added hidden layers and increased epochs.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Visualizations</h2>
+                <p>Visualizations provide insights into model performance:</p>
+                <ul>
+                    <li><strong>Confusion Matrix:</strong> Highlights misclassifications (e.g., 4 vs. 9).</li>
+                    <li><strong>Energy Plot:</strong> Shows energy consumption per epoch for SNN.</li>
+                    <li><strong>Accuracy Plot:</strong> Tracks training/validation accuracy for SNN and CNN.</li>
+                </ul>
+                <div class="screenshots">
+                    <div class="screenshot">
+                        <div class="placeholder-img">Placeholder for Confusion Matrix</div>
+                        <p>Confusion Matrix</p>
+                    </div>
+                    <div class="screenshot">
+                        <div class="placeholder-img">Placeholder for Energy Plot</div>
+                        <p>Energy Plot</p>
+                    </div>
+                    <div class="screenshot">
+                        <div class="placeholder-img">Placeholder for Accuracy Plot</div>
+                        <p>Accuracy Plot</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Technologies Used</h2>
+                <ul class="tech-list">
+                    <li>Python</li>
+                    <li>Brian2</li>
+                    <li>NumPy</li>
+                    <li>Matplotlib</li>
+                    <li>PyTorch</li>
+                    <li>Argparse</li>
+                    <li>MNIST Dataset</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Explore the Code</h2>
+                <p>Check out the full project on GitHub to dive into the implementation details.</p>
+                <a href="https://github.com/nagibator9986/mnist-liff-izhekebich-cnn" class="project-link" target="_blank">View Repository</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Contact Me</h3>
+        <p>Email: [Your Email]</p>
+        <p>GitHub: <a href="https://github.com/nagibator9986">nagibator9986</a></p>
+        <p>© 2025 Nagibator9986. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
